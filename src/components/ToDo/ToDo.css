@@ -11,6 +11,10 @@
     margin-bottom: 40px;
 }
 
+form {
+    margin-top: 20px;
+}
+
 .row {
     margin: auto;
     width: 80%;
@@ -56,4 +60,20 @@ button:hover {
 
 .result-container h3 {
     color: #ecd3d3;
+}
+
+.result-container ol {
+    text-align: left;
+    margin: auto;
+    width: 70%;
+    margin-bottom: 40px;
+}
+
+.result-container ol li {
+    border-bottom: 1px greenyellow solid;
+    margin-bottom: 4px;
+}
+
+.close:hover {
+    cursor: pointer;
 }
