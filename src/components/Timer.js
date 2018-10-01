@@ -15,7 +15,9 @@ export class Timer extends Component {
   componentDidMount = () => {
     setInterval(this.updateTime, 1000);
   };
-
+  componentWillMount = () => {
+    this.updateTime = false;
+  };
   render() {
     return (
       <div

@@ -2,20 +2,21 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 //components
 import MainPage from "./components/MainPage";
-import NextBtn from "./components/widgets/NextBtn";
 //TO DELETE
-import Test from "./components/NextPage/Test";
+import FunFood from "./components/NextPage/FunFood";
 
 class App extends Component {
   state = {
-    isHome: true
+    isHome: true,
+    buttonContentHome: true
   };
   handleClick = () => {
     this.setState(prevState => ({
-      isHome: !prevState.isHome
+      isHome: !prevState.isHome,
+      buttonContentHome: !prevState.buttonContentHome
     }));
   };
   render() {
@@ -30,12 +31,15 @@ class App extends Component {
           </div>
           <Switch>
             <Route path="/" exact component={MainPage} />
-            <Route path="/next" component={Test} />
+            <Route path="/next" component={FunFood} />
           </Switch>
-          <NextBtn
+          <Link
+            className="nxt-btn"
             to={this.state.isHome ? "/next" : "/"}
             onClick={this.handleClick}
-          />
+          >
+            {this.state.buttonContentHome ? "Next Page" : "Previous Page"}
+          </Link>
           <hr />
         </div>
       </BrowserRouter>

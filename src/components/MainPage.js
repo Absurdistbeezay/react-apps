@@ -6,11 +6,11 @@ import ToDo from "./ToDo/ToDo";
 
 const MainPage = () => {
   return (
-    <div className="main-container">
+    <React.Fragment>
       <About />
       <Timer />
       <ToDo />
-    </div>
+    </React.Fragment>
   );
 };
 

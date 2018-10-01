@@ -32,6 +32,23 @@ hr {
   margin-top: 20px;
 }
 
+/*Next Button*/
+
+.nxt-btn {
+  text-decoration: none;
+  border: 1px solid #12089b;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #12089b;
+  color: #fff;
+  font-size: 20px;
+}
+
+.nxt-btn:hover {
+  background-color: blue;
+  padding: 12px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
