@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import firebase from "../../firebase";
 import "./ToDo.css";
 
 export class ToDo extends Component {
@@ -6,12 +7,30 @@ export class ToDo extends Component {
     input: "",
     todoList: []
   };
+  componentDidMount = () => {
+    const todosRef = firebase.database().ref("todos");
+    todosRef.on("value", snapshot => {
+      const tasks = snapshot.val();
+      const newState = [];
+      for (let task in tasks) {
+        newState.push({
+          id: task,
+          task: tasks[task]
+        });
+      }
+
+      this.setState({
+        todoList: newState
+      });
+    });
+  };
   handleSubmit = e => {
     e.preventDefault();
-    //TODO
-    this.state.todoList.push(this.state.input);
+    const todos = firebase.database().ref("todos");
+
+    todos.push(this.state.input);
     this.setState({
-      todoList: this.state.todoList,
+      todoList: [],
       input: ""
     });
   };
@@ -22,18 +41,10 @@ export class ToDo extends Component {
     });
   };
 
-  handleDelete = e => {
-    const targetToDelete = e.target.parentNode.textContent;
-    console.log(targetToDelete);
-
-    const filteredTodos = this.state.todoList.filter(
-      //trim to delete space
-      todo => todo != targetToDelete.trim()
-    );
-    console.log(filteredTodos);
-    this.setState({
-      todoList: filteredTodos
-    });
+  handleDelete = taskId => {
+    const taskToDelete = firebase.database().ref(`todos/${taskId}`);
+    console.log(taskId);
+    taskToDelete.remove();
   };
   render() {
     return (
@@ -57,12 +68,14 @@ export class ToDo extends Component {
                 No task to do. Please Add.
               </div>
             ) : (
-              this.state.todoList.map((task, i) => (
-                <li key={i} style={{ position: "relative" }}>
+              this.state.todoList.map(task => (
+                <li key={task.id} style={{ position: "relative" }}>
                   {" "}
-                  {task}{" "}
+                  {task.task}{" "}
                   <i
-                    onClick={this.handleDelete}
+                    onClick={() => {
+                      this.handleDelete(task.id);
+                    }}
                     className="fas fa-times close"
                     style={{ color: "red", position: "absolute", right: "0px" }}
                   />

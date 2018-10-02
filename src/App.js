@@ -5,8 +5,8 @@ import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 //components
 import MainPage from "./components/MainPage";
-//TO DELETE
 import FunFood from "./components/NextPage/FunFood";
+import Song from "./components/NextPage/Songs.js/Song";
 
 class App extends Component {
   state = {
@@ -32,6 +32,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={MainPage} />
             <Route path="/next" component={FunFood} />
+            <Route path="/song" component={Song} />
           </Switch>
           <Link
             className="nxt-btn"

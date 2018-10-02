@@ -54,7 +54,6 @@ class FunFood extends Component {
   };
 
   render() {
-    console.log(this.state.items);
     return (
       <div className="FunContainer">
         <section className="add-item">
